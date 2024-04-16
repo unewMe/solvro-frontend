@@ -15,7 +15,10 @@ body {
     Droid Sans,
     Helvetica Neue,
     sans-serif;
-}
+  font-size: 16px;
+  height: 100vh;
+} */
+
 
 a {
   color: inherit;
@@ -30,3 +33,20 @@ img {
   max-width: 100%;
   height: auto;
 }
+
+
+:root {
+  --background-color: #fff;
+  --text-color: #000;
+}
+
+[data-theme="dark"] {
+  --background-color: #333;
+  --text-color: #fff;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+

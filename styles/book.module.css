@@ -1,0 +1,64 @@
+
+
+.book_item {
+    position: relative;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 10px;
+    margin: 10px 0;
+    background-color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+  }
+  
+.book_title {
+    color: #333;
+    font-size: 1.2em;
+    font-weight: 600;
+}
+  
+.book_author {
+    color: #666;
+    font-size: 1em;
+    margin-top: 4px;
+}
+
+.heart_icon {
+    display: flex;
+    width: 24px; 
+    height: auto; 
+    cursor: pointer; 
+    align-items: right;
+}
+
+
+.favorite_container {
+    padding: 0;
+    border: none;
+    background: none;
+
+}
+
+.book_link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;       
+    justify-content: flex-end; 
+    margin-right: 20px;  
+    margin-left: 20px; 
+    transition: color 0.3s; 
+}
+
+.book_link:hover {
+    color: #007bff; 
+}
+
+
+.book_actions {
+    display: flex;
+    align-items: center;
+}
+
+
+  

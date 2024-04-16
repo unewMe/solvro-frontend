@@ -1,0 +1,39 @@
+.navbar {
+  z-index: 1000;
+  position: relative;
+  background-color: rgba(255, 255, 255, 0); /* przezroczyste tło */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.navLinks {
+  list-style: none; /* usuwa wypunktowanie */
+  display: flex;
+  justify-content: center;
+  padding: 0; /* usuwa domyślne paddingi dla listy */
+  margin: 0; /* usuwa domyślne marginesy dla listy */
+}
+
+.navLinkItem {
+  margin-right: 30px; /* odstępy między linkami, ostatni link nie potrzebuje marginesu */
+  text-decoration: none; /* usuwa podkreślenie */
+  color: #333; /* kolor tekstu */
+}
+
+.navLinkItem:last-child {
+  margin-right: 0; /* usuwa margines z ostatniego elementu, aby nie było przesunięcia */
+}
+
+.navLinkItem a {
+  text-decoration: none; /* usuwa podkreślenie z linków */
+  color: inherit; /* spowoduje, że linki będą miały ten sam kolor co element rodzica */
+  transition: color 0.3s; /* płynna zmiana koloru przy hover */
+}
+
+.navLinkItem a:hover {
+  color: #007bff; /* kolor tekstu linków po najechaniu kursorem */
+}
