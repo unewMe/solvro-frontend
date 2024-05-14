@@ -27,41 +27,43 @@ function BooksSearch({ favorites, handleFavorite }: AppContextType) {
   const [currUrl, setCurrUrl] = useState(baseUrl);
   const [prevUrl, setPrevUrl] = useState("");
   const [nextUrl, setNextUrl] = useState("");
-  const [filterTags, setFilterdTags] = useState([]);
+  const [filterTags, setFilterdTags] = useState<string[]>([]);
 
   useEffect(() => {
     const delay = searchQuery ? DELAY : 0; // no delay for initial fetch
-    const handler = async () => {
-      const url = new URL(currUrl);
-      if (searchQuery) {
-        url.searchParams.append("search", searchQuery);
-      }
+    const getBooksByDebouncing = setTimeout(() => {
+        const fetchData = async () => {
+            const url = new URL(currUrl);
+            if (searchQuery) {
+                url.searchParams.append("search", searchQuery);
+            }
 
-      if (filterTags.length >= 1) {
-        url.searchParams.append("languages", filterTags.join(","));
-      }
+            if (filterTags.length >= 1) {
+                url.searchParams.append("languages", filterTags.join(","));
+            }
 
-      try {
-        const response = await fetch(url);
-        const data = (await response.json()) as JsonResponse;
-        const booksWithHtml = data.results.map((book) => {
-          return {
-            ...book,
-            htmlLink: book.formats["text/html"],
-          };
-        });
-        setBooks(booksWithHtml);
-        setPrevUrl(data.previous);
-        setNextUrl(data.next);
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.error("Error fetching books", error);
-      }
-    };
-    const getBooksByDebouncing = setTimeout(handler, delay);
+            try {
+                const response = await fetch(url);
+                const data = (await response.json()) as JsonResponse;
+                const booksWithHtml = data.results.map((book) => {
+                    return {
+                        ...book,
+                        htmlLink: book.formats["text/html"],
+                    };
+                });
+                setBooks(booksWithHtml);
+                setPrevUrl(data.previous);
+                setNextUrl(data.next);
+            } catch (error) {
+                // eslint-disable-next-line no-console
+                console.error("Error fetching books", error);
+            }
+        };
+        void fetchData();
+    }, delay);
 
-    return () => clearTimeout(getBooksByDebouncing);
-  }, [searchQuery, currUrl, filterTags]);
+    return () => {clearTimeout(getBooksByDebouncing)};
+}, [searchQuery, currUrl, filterTags]);
 
   if (!books) {
     return <div className={styles.loading}>Loading books...</div>;
@@ -86,15 +88,16 @@ function BooksSearch({ favorites, handleFavorite }: AppContextType) {
         <div>
           {languages.map((clickedLanguage) => (
             <button
-              className={`${styles.language_button} ${filterTags.includes(clickedLanguage) ? styles.active : ""}`}
-              onClick={() => {
-                var newList = [...filterTags];
-                toggleStringInList(clickedLanguage, newList);
-                setBooks(null);
-                setCurrUrl(baseUrl);
-                setFilterdTags(newList);
-              }}
-            >
+            key={clickedLanguage} // Unique key prop added here
+            className={`${styles.language_button} ${filterTags.includes(clickedLanguage) ? styles.active : ""}`}
+            onClick={() => {
+              const newList = [...filterTags];
+              toggleStringInList(clickedLanguage, newList);
+              setBooks(null);
+              setCurrUrl(baseUrl);
+              setFilterdTags(newList);
+            }}
+          >
               {clickedLanguage.toUpperCase()}
             </button>
           ))}

@@ -1,10 +1,16 @@
 import { createContext, useContext } from "react";
 import type { ReactNode } from "react";
-import { Book } from "./Book";
+
+export interface BookProps {
+  book: Book_t;
+  isFavorite: boolean;
+  handleFavorite: (book: Book_t) => void;
+}
+
 
 export interface AppContextType {
-  favorites: never[];
-  handleFavorite?: (book: Book) => void;
+  favorites: Book_t[];
+  handleFavorite: (book: Book_t) => void;
 }
 
 const AppContext = createContext<AppContextType>({
@@ -18,6 +24,7 @@ export interface Book_t {
   authors: Array<{ name: string }>;
   formats: { "text/html": string}
   htmlLink: string;
+  languages: Array<{ name: string }>;
 }
 
 interface AppContextProviderProps {

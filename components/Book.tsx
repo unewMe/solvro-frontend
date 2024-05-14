@@ -1,11 +1,13 @@
 import React from 'react';
 import styles from '../styles/book.module.css';
+import type { BookProps } from './appContext';
 
-const Book = React.memo(({ book, isFavorite, handleFavorite }) => {
-  const handleFavoriteClick = (e) => {
-    e.stopPropagation(); 
-    handleFavorite(book); 
-  };
+const Book = React.memo(function Book({ book, isFavorite, handleFavorite }: BookProps) {
+  const handleFavoriteClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    handleFavorite(book);
+};
+
 
   return (
     <div className={styles.book_item}>

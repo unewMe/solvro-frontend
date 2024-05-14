@@ -2,23 +2,24 @@ import React, { useState, useEffect } from 'react';
 import {Book} from './Book';
 import styles from '../styles/book-search.module.css';
 import { languages, toggleStringInList } from './BookSearch';
-import type { AppContextType } from './appContext';
+import type { AppContextType, Book_t } from './appContext';
 
 function Favorites({ favorites, handleFavorite }: AppContextType) {
-  const [favoriteBooks, setFavoriteBooks] = useState([]);
+  const [favoriteBooks, setFavoriteBooks] = useState<Book_t[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [filterTags, setFilterdTags] = useState([]);
+  const [filterTags, setFilterdTags] = useState<string[]>([]);
   const [isFirstLoad, setIsFirstLoad] = useState(true);
 
   useEffect(() => {
 
     setIsFirstLoad(false);
 
-    const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || favorites;
-
+    const savedFavoritesJSON = localStorage.getItem('favorites');
+    const savedFavorites = (savedFavoritesJSON !== null) ? JSON.parse(savedFavoritesJSON) as Book_t[] : [];
+    
     const filtered = savedFavorites.filter(book => {
     const matchesSearchQuery = book.title.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesLanguage = filterTags.length == 0 || book.languages.some(language => filterTags.includes(language));
+    const matchesLanguage = filterTags.length === 0 || book.languages.some(language => filterTags.includes(language.name));
     
     return matchesSearchQuery && matchesLanguage;
   });
@@ -27,7 +28,16 @@ function Favorites({ favorites, handleFavorite }: AppContextType) {
     setFavoriteBooks(filtered);
   }, [favorites, searchQuery, filterTags]);
 
-  if ((!favoriteBooks.length && !searchQuery && !filterTags.length && isFirstLoad) || JSON.parse(localStorage.getItem('favorites')).length == 0){
+  const hasNoFavorites = () => {
+    const savedFavoritesJSON = localStorage.getItem('favorites');
+    if (savedFavoritesJSON !== null) {
+        const savedFavorites = JSON.parse(savedFavoritesJSON) as Book_t[];
+        return savedFavorites.length === 0;
+    }
+    return true;
+  };
+
+  if ((!favoriteBooks.length && !searchQuery && !filterTags.length && isFirstLoad) || hasNoFavorites()){
     return <div className={styles.loading}>Brak ulubionych książek.</div>;
   }
 
@@ -44,22 +54,26 @@ function Favorites({ favorites, handleFavorite }: AppContextType) {
       </div>
     
       <div>
-      {
-        languages.map(clickedLanguage => (
-          <button className={`${styles.language_button} ${filterTags.includes(clickedLanguage) ? styles.active : ''}`} onClick={() => { 
-            var newList = [...filterTags];
-            toggleStringInList(clickedLanguage, newList);
-            setFavoriteBooks([]);
-              setFilterdTags(newList);
-          }}>{clickedLanguage.toUpperCase()}</button>
-        ))
-      }
+          {languages.map(clickedLanguage => (
+            <button
+              key={clickedLanguage}
+              className={`${styles.language_button} ${filterTags.includes(clickedLanguage) ? styles.active : ''}`}
+              onClick={() => {
+                const newList = [...filterTags];
+                toggleStringInList(clickedLanguage, newList);
+                setFavoriteBooks([]);
+                setFilterdTags(newList);
+              }}
+            >
+              {clickedLanguage.toUpperCase()}
+            </button>
+          ))}
 
       </div>
     </div>
 
     <div>
-      {favoriteBooks.map(book  => (
+      {favoriteBooks.map((book:Book_t)  => (
         <Book 
           key={book.id} 
           book={book} 
