@@ -1,32 +1,22 @@
-import Link from 'next/link';
-import React from 'react';
-import styles from '../styles/navbar.module.css';
+import Link from "next/link";
+import React from "react";
 
-const NavBar = () => {
+import styles from "../styles/navbar.module.css";
+
+export const NavBar = () => {
   return (
     <nav className={styles.navbar}>
       <ul className={styles.navLinks}>
         <li className={styles.navLinkItem}>
-          <Link href="/">
-            Main Page
-          </Link>
+          <Link href="/">Main Page</Link>
         </li>
         <li className={styles.navLinkItem}>
-          <Link href="/books">
-            Books
-          </Link>
+          <Link href="/books">Books</Link>
         </li>
         <li className={styles.navLinkItem}>
-          <Link href="/favorites">
-            Favorites
-          </Link>
+          <Link href="/favorites">Favorites</Link>
         </li>
       </ul>
     </nav>
   );
 };
-
-export default NavBar;
-
-
-

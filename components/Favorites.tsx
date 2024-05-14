@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import Book from './Book';
+import {Book} from './Book';
 import styles from '../styles/book-search.module.css';
 import { languages, toggleStringInList } from './BookSearch';
+import type { AppContextType } from './appContext';
 
-function Favorites({ favorites, handleFavorite }) {
+function Favorites({ favorites, handleFavorite }: AppContextType) {
   const [favoriteBooks, setFavoriteBooks] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [filterTags, setFilterdTags] = useState([]);
@@ -58,7 +59,7 @@ function Favorites({ favorites, handleFavorite }) {
     </div>
 
     <div>
-      {favoriteBooks.map(book => (
+      {favoriteBooks.map(book  => (
         <Book 
           key={book.id} 
           book={book} 
@@ -71,4 +72,4 @@ function Favorites({ favorites, handleFavorite }) {
   );
 }
 
-export default Favorites;
+export {Favorites};

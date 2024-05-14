@@ -5,6 +5,7 @@
       "@assets/*": ["public/legacy/assets/*"],
       "@public/*": ["public/*"],
       "@/*": ["src/*"]
+    
     },
     "target": "es2016",
     "esModuleInterop": true,

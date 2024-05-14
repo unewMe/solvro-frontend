@@ -25,5 +25,5 @@ const Book = React.memo(({ book, isFavorite, handleFavorite }) => {
   );
 });
 
-export default Book;
+export {Book};
 
