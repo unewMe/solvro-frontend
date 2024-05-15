@@ -11,29 +11,29 @@
 }
 
 .navLinks {
-  list-style: none; 
+  list-style: none;
   display: flex;
   justify-content: center;
-  padding: 0; 
-  margin: 0; 
+  padding: 0;
+  margin: 0;
 }
 
 .navLinkItem {
-  margin-right: 30px; 
-  text-decoration: none; 
-  color: #333; 
+  margin-right: 30px;
+  text-decoration: none;
+  color: #333;
 }
 
 .navLinkItem:last-child {
-  margin-right: 0; 
+  margin-right: 0;
 }
 
 .navLinkItem a {
-  text-decoration: none; 
-  color: inherit; 
-  transition: color 0.3s; 
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s;
 }
 
 .navLinkItem a:hover {
-  color: #007bff; 
+  color: #007bff;
 }
