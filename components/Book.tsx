@@ -1,5 +1,5 @@
 import React from "react";
-
+import Image from "next/image";
 import styles from "../styles/book.module.css";
 import type { BookProps } from "./appContext";
 
@@ -27,16 +27,20 @@ const Book = React.memo(function Book({
           onClick={handleFavoriteClick}
         >
           {isFavorite ? (
-            <img
+            <Image
               src="/icons/heart-filled.svg"
               className={styles.heart_icon}
               alt="Remove from favorites"
+              width={500} // określ odpowiednią szerokość
+              height={500} // określ odpowiednią wysokość
             />
           ) : (
-            <img
+            <Image
               src="/icons/heart-icon.svg"
               className={styles.heart_icon}
               alt="Add to favorites"
+              width={500} // określ odpowiednią szerokość
+              height={500} // określ odpowiednią wysokość
             />
           )}
         </button>

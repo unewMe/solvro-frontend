@@ -13,7 +13,8 @@ export interface AppContextType {
 }
 
 const AppContext = createContext<AppContextType>({
-  favorites: [], // Przykładowa domyślna wartość, dostosuj do swoich potrzeb
+  favorites: [], 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   handleFavorite: () => {},
 });
 
