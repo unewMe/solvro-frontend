@@ -1,6 +1,4 @@
-
-
-import styles from '../styles/footer.module.css';
+import styles from "../styles/footer.module.css";
 
 const Footer = () => {
   return (
@@ -10,7 +8,4 @@ const Footer = () => {
   );
 };
 
-export {Footer}
-
-
-  
+export { Footer };

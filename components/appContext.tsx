@@ -7,7 +7,6 @@ export interface BookProps {
   handleFavorite: (book: Book_t) => void;
 }
 
-
 export interface AppContextType {
   favorites: Book_t[];
   handleFavorite: (book: Book_t) => void;
@@ -22,7 +21,7 @@ export interface Book_t {
   id: string;
   title: string;
   authors: Array<{ name: string }>;
-  formats: { "text/html": string}
+  formats: { "text/html": string };
   htmlLink: string;
   languages: Array<{ name: string }>;
 }
