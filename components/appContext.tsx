@@ -13,7 +13,7 @@ export interface AppContextType {
 }
 
 const AppContext = createContext<AppContextType>({
-  favorites: [], 
+  favorites: [],
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   handleFavorite: () => {},
 });
@@ -48,5 +48,3 @@ export function AppContextProvider({
 export function useAppContext() {
   return useContext(AppContext);
 }
-
-//elo zelo
