@@ -1,5 +1,6 @@
-import React from "react";
 import Image from "next/image";
+import React from "react";
+
 import styles from "../styles/book.module.css";
 import type { BookProps } from "./appContext";
 
@@ -31,16 +32,16 @@ const Book = React.memo(function Book({
               src="/icons/heart-filled.svg"
               className={styles.heart_icon}
               alt="Remove from favorites"
-              width={500} // określ odpowiednią szerokość
-              height={500} // określ odpowiednią wysokość
+              width={500}
+              height={500}
             />
           ) : (
             <Image
               src="/icons/heart-icon.svg"
               className={styles.heart_icon}
               alt="Add to favorites"
-              width={500} // określ odpowiednią szerokość
-              height={500} // określ odpowiednią wysokość
+              width={500}
+              height={500}
             />
           )}
         </button>
